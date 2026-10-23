@@ -1,0 +1,67 @@
+# Autonomous Car using RL - Configuration Settings
+
+environment:
+  town: "Town10HD"
+  quality_level: "Epic" # Full high-fidelity rendering
+  observation_mode: "enhanced" # "enhanced" (24 features) or "legacy" (11 features)
+  max_route_deviation: 4.5
+  lookahead_waypoints: 10
+  target_speed_mps: 12.0 # ~43 km/h
+  max_speed_mps: 20.0    # ~72 km/h
+
+# Feature 1: Stray Animals
+stray_animals:
+  enabled: true
+  spawn_distance_min: 25.0
+  spawn_distance_max: 50.0
+  max_animals: 3
+  crossing_probability: 0.6
+  wander_speed: 1.8 # m/s
+  critical_ttc_trigger: 3.0 # seconds before triggering sudden dart/crossing
+
+# Feature 2: Faded Line Markings & Potholes
+road_hazards:
+  faded_lines:
+    enabled: true
+    faded_segment_probability: 0.35
+    min_confidence: 0.15 # Minimum lane line detection confidence
+    noise_sigma: 0.45    # Gaussian noise std-dev added when lines fade
+  potholes:
+    enabled: true
+    count_per_km: 8
+    radius_min: 0.4
+    radius_max: 1.1
+    severity_min: 0.3
+    severity_max: 1.0
+    impact_penalty_scale: 15.0
+
+# Feature 3: Bike Cutting (Aggressive Two-Wheelers)
+bike_cutting:
+  enabled: true
+  spawn_interval_steps: 120
+  speed_ratio_to_ego: 1.35 # Bike is 35% faster than ego to initiate overtake
+  overtake_start_distance: -15.0 # meters behind ego
+  cut_in_distance_ahead: 7.0 # meters ahead of ego when cutting in
+  cut_in_lateral_speed: 2.2 # m/s lateral transition
+
+# Feature 4: Intent Prediction (Confidence-Based)
+intent_prediction:
+  enabled: true
+  history_window_steps: 10
+  confidence_smoothing: 0.7
+  maneuver_classes:
+    - "LANE_FOLLOW"
+    - "CUT_IN"
+    - "CROSSING"
+    - "DECELERATING"
+
+# Feature 5: Emergency Vehicle Sensing (Sound-Based)
+emergency_siren:
+  enabled: true
+  base_sound_level_db: 120.0
+  reference_frequency_hz: 900.0
+  ambient_noise_db: 65.0
+  speed_of_sound_mps: 343.0
+  distance_decay_alpha: 0.008
+  mic_array_resolution_deg: 5.0
+  yield_distance_threshold: 45.0

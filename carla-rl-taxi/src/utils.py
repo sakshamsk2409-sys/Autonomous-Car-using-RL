@@ -1,21 +1,29 @@
 import os
+import sys
 import subprocess
 import time
+
+carla_pythonapi = r"C:\Users\sahak\OneDrive\Documents\AIDS\ML\UE4\PythonAPI"
+if os.path.exists(carla_pythonapi):
+    if carla_pythonapi not in sys.path:
+        sys.path.append(carla_pythonapi)
+    p_carla = os.path.join(carla_pythonapi, "carla")
+    if p_carla not in sys.path:
+        sys.path.append(p_carla)
+
 import carla
 
-def launch_carla_server(carla_path, port=2000):
+def launch_carla_server(carla_path, port=2000, quality_level="Epic"):
     """
-    Launches the CARLA simulator executable in low-rendering mode 
-    to preserve resources on your graphics card.
+    Launches the CARLA simulator executable in full high-fidelity Epic mode.
     """
     executable = os.path.join(carla_path, "CarlaUE4.exe")
     if not os.path.exists(executable):
         raise FileNotFoundError(f"Could not locate CARLA executable at {executable}")
     
-    print("Launching CARLA Simulator Server...")
+    print(f"Launching CARLA Simulator Server in [{quality_level}] graphics quality...")
     
-    # FIXED: Added -dx11 flag to prevent DXGI device reset crashes
-    cmd = [executable, f"-carla-rpc-port={port}", "-quality-level=Low", "-dx11"]
+    cmd = [executable, f"-carla-rpc-port={port}", f"-quality-level={quality_level}", "-dx11"]
     
     process = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(20)

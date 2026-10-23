@@ -1,3 +1,14 @@
+import os
+import sys
+
+carla_pythonapi = r"C:\Users\sahak\OneDrive\Documents\AIDS\ML\UE4\PythonAPI"
+if os.path.exists(carla_pythonapi):
+    if carla_pythonapi not in sys.path:
+        sys.path.append(carla_pythonapi)
+    p_carla = os.path.join(carla_pythonapi, "carla")
+    if p_carla not in sys.path:
+        sys.path.append(p_carla)
+
 import carla
 
 def main():
