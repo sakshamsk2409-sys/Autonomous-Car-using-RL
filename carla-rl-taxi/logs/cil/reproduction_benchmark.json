@@ -1,0 +1,33 @@
+{
+    "timestamp": "2026-10-23 10:00:57",
+    "epochs": 15,
+    "batch_size": 64,
+    "obs_dim": 24,
+    "branched_best_val_loss": 0.05268600112513492,
+    "branched_best_steer_mae": 0.004926382067711337,
+    "baseline_best_val_loss": 0.052349951216264776,
+    "baseline_best_steer_mae": 0.00495168298335844,
+    "steer_improvement_pct": 0.5109558857490119,
+    "branched_branch_diagnostics": {
+        "FOLLOW_LANE": {
+            "count": 1680,
+            "steer_mae": 0.0036080521531403065,
+            "tb_mae": 0.04563971608877182
+        },
+        "TURN_LEFT": {
+            "count": 0,
+            "steer_mae": 0.0,
+            "tb_mae": 0.0
+        },
+        "TURN_RIGHT": {
+            "count": 329,
+            "steer_mae": 0.013048919849097729,
+            "tb_mae": 0.05426456779241562
+        },
+        "GO_STRAIGHT": {
+            "count": 391,
+            "steer_mae": 0.003555196337401867,
+            "tb_mae": 0.044762544333934784
+        }
+    }
+}
